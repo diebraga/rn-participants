@@ -24,9 +24,8 @@ export const homeStyles = StyleSheet.create({
   layoutView: {
     marginTop: 100,
     maxWidth: "90%",
-    borderColor: '#FF3D00',
-    borderWidth: 5,
     width: "100%",
+    flex: 1
   },
   input: {
     height: 56,
@@ -42,7 +41,7 @@ export const homeStyles = StyleSheet.create({
   button: {
     height: 56,
     borderRadius: 5,
-    backgroundColor: "#54a7d1",
+    backgroundColor: "#31CF67",
     alignItems: "center",
     justifyContent: "center",
     marginTop: 5,
@@ -56,7 +55,7 @@ export const homeStyles = StyleSheet.create({
   form: {
     flexDirection: "row",
     width: "100%",
-    marginTop: 25,
+    marginTop: 15,
     marginBottom: 30
   }
 });

@@ -1,4 +1,4 @@
-import { View, Text, TextInput, TouchableOpacity } from 'react-native'
+import { View, Text, TextInput, TouchableOpacity, ScrollView } from 'react-native'
 import React, { useState } from 'react'
 import { homeStyles } from './styles'
 import { Participant } from '../../components/Participants';
@@ -8,8 +8,25 @@ type Participants = {
   name: string;
 }
 
+const participantsList = [
+  { id: 1, name: "Diego Braga" },
+  { id: 2, name: "Matteo Palazzolo" },
+  { id: 3, name: "Aine Lawless" },
+  { id: 4, name: "Vicente West" },
+  { id: 5, name: "Daniel Burke" },
+  { id: 6, name: "Quinton Mendoza" },
+  { id: 7, name: "Logan Bonilla" },
+  { id: 8, name: "Aedan Weiss" },
+  { id: 9, name: "Benjamin Gregory" },
+  { id: 10, name: "Karly Kelly" },
+  { id: 11, name: "Sandra Foley" },
+  { id: 12, name: "German Lara" },
+  { id: 13, name: "Brylee Ortiz" },
+  { id: 14, name: "Kyson Zimmerman" },
+]
+
 export const Home: React.FC = () => {
-  const [participants, setParticipants] = useState<Participants[]>([])
+  const [participants, setParticipants] = useState<Participants[]>(participantsList)
   return (
     <View style={homeStyles.container}>
       <View style={homeStyles.layoutView}>
@@ -32,9 +49,17 @@ export const Home: React.FC = () => {
             </Text>
           </TouchableOpacity>
         </View>
-        <Participant />
-        <Participant />
-        <Participant />
+        <View style={{ flex: 1 }}>
+          <ScrollView>
+            {participants.map(participant =>
+              <Participant
+                id={participant.id}
+                key={participant.id}
+                name={participant.name}
+                onRemove={() => alert("Delete")} />
+            )}
+          </ScrollView>
+        </View>
       </View>
     </View>
   )
