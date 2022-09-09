@@ -3,11 +3,6 @@ import React, { useState } from 'react'
 import { homeStyles } from './styles'
 import { Participant } from '../../components/Participants';
 
-type Participants = {
-  id: number;
-  name: string;
-}
-
 const participantsList = [
   { id: 1, name: "Diego Braga" },
   { id: 2, name: "Matteo Palazzolo" },
@@ -15,18 +10,12 @@ const participantsList = [
   { id: 4, name: "Vicente West" },
   { id: 5, name: "Daniel Burke" },
   { id: 6, name: "Quinton Mendoza" },
-  { id: 7, name: "Logan Bonilla" },
-  { id: 8, name: "Aedan Weiss" },
-  { id: 9, name: "Benjamin Gregory" },
-  { id: 10, name: "Karly Kelly" },
-  { id: 11, name: "Sandra Foley" },
-  { id: 12, name: "German Lara" },
-  { id: 13, name: "Brylee Ortiz" },
   { id: 14, name: "Kyson Zimmerman" },
 ]
 
 export const Home: React.FC = () => {
-  const [participants, setParticipants] = useState<Participants[]>(participantsList)
+  const [participants, setParticipants] = useState<typeof participantsList>(participantsList)
+  const [participantName, setParticipantName] = useState("")
 
   const handleRemoveParticipant = (name: string): void => {
     return Alert.alert("Delete", `Are you you want to delete ${name}?`, [
@@ -34,6 +23,20 @@ export const Home: React.FC = () => {
       { text: "No", style: "cancel" }
     ])
   }
+
+  const handleAddNewParticipant = () => {
+    const newParticipant: typeof participantsList[0] = {
+      id: participants.length + 1,
+      name: participantName
+    }
+    if (!participants.some(participant => participant.name === participantName)) {
+      setParticipants(prev => [...prev, newParticipant])
+    } else {
+      alert("Participant already exists")
+    }
+    setParticipantName("")
+  }
+
   return (
     <View style={homeStyles.container}>
       <View style={homeStyles.layoutView}>
@@ -46,10 +49,12 @@ export const Home: React.FC = () => {
             style={homeStyles.input}
             placeholder="Add new participant"
             placeholderTextColor="#6b6b6b6b"
+            onChangeText={(text) => setParticipantName(text)}
+            value={participantName}
           />
           <TouchableOpacity
             style={homeStyles.button}
-            onPress={() => { }}
+            onPress={handleAddNewParticipant}
           >
             <Text style={homeStyles.buttonText}>
               +
