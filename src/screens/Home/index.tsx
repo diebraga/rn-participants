@@ -1,4 +1,4 @@
-import { View, Text, TextInput, TouchableOpacity, ScrollView } from 'react-native'
+import { View, Text, TextInput, TouchableOpacity, ScrollView, FlatList } from 'react-native'
 import React, { useState } from 'react'
 import { homeStyles } from './styles'
 import { Participant } from '../../components/Participants';
@@ -49,16 +49,21 @@ export const Home: React.FC = () => {
             </Text>
           </TouchableOpacity>
         </View>
-        <View style={{ flex: 1 }}>
-          <ScrollView>
-            {participants.map(participant =>
-              <Participant
-                id={participant.id}
-                key={participant.id}
-                name={participant.name}
-                onRemove={() => alert("Delete")} />
-            )}
-          </ScrollView>
+        <View style={{ height: "70%" }}>
+          <FlatList
+            data={participants}
+            keyExtractor={item => String(item.id)}
+            ListEmptyComponent={() =>
+              <Text style={homeStyles.emptyText}>You don't have anybody listed in your event.</Text>
+            }
+            renderItem={({ item }) => <Participant
+              id={item.id}
+              key={item.id}
+              name={item.name}
+              onRemove={() => alert("Delete")}
+            />
+            }
+          />
         </View>
       </View>
     </View>

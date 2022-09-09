@@ -57,5 +57,10 @@ export const homeStyles = StyleSheet.create({
     width: "100%",
     marginTop: 15,
     marginBottom: 30
+  },
+  emptyText: {
+    color: "#fff",
+    fontSize: 14,
+    textAlign: "center"
   }
 });
