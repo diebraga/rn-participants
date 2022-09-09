@@ -5,21 +5,20 @@ import { Participant } from '../../components/Participants';
 
 const participantsList = [
   { id: 1, name: "Diego Braga" },
-  { id: 2, name: "Matteo Palazzolo" },
-  { id: 3, name: "Aine Lawless" },
-  { id: 4, name: "Vicente West" },
-  { id: 5, name: "Daniel Burke" },
-  { id: 6, name: "Quinton Mendoza" },
-  { id: 14, name: "Kyson Zimmerman" },
 ]
 
 export const Home: React.FC = () => {
-  const [participants, setParticipants] = useState<typeof participantsList>(participantsList)
+  const [participants, setParticipants] = useState<typeof participantsList>([])
   const [participantName, setParticipantName] = useState("")
 
-  const handleRemoveParticipant = (name: string): void => {
+  const handleRemoveParticipant = (name: string, id: number): void => {
     return Alert.alert("Delete", `Are you you want to delete ${name}?`, [
-      { text: "Yes", onPress: () => alert(`${name} deleted.`) },
+      {
+        text: "Yes", onPress: () => {
+          alert(`${name} deleted.`)
+          return setParticipants(participants.filter(participant => participant.id !== id))
+        }
+      },
       { text: "No", style: "cancel" }
     ])
   }
@@ -72,7 +71,7 @@ export const Home: React.FC = () => {
               id={item.id}
               key={item.id}
               name={item.name}
-              onRemove={() => handleRemoveParticipant(item.name)}
+              onRemove={() => handleRemoveParticipant(item.name, item.id)}
             />
             }
           />
