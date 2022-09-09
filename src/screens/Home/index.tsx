@@ -39,7 +39,7 @@ export const Home: React.FC = () => {
   return (
     <View style={homeStyles.container}>
       <View style={homeStyles.layoutView}>
-        <Text style={homeStyles.headingText}>Event Name</Text>
+        <Text style={homeStyles.headingText}>Tomorrowland 2022</Text>
         <Text style={homeStyles.headingHelperText}>
           Friday, 4 November 2022
         </Text>
