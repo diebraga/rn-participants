@@ -1,4 +1,4 @@
-import { View, Text, TextInput, TouchableOpacity, ScrollView, FlatList } from 'react-native'
+import { View, Text, TextInput, TouchableOpacity, FlatList, Alert } from 'react-native'
 import React, { useState } from 'react'
 import { homeStyles } from './styles'
 import { Participant } from '../../components/Participants';
@@ -27,6 +27,13 @@ const participantsList = [
 
 export const Home: React.FC = () => {
   const [participants, setParticipants] = useState<Participants[]>(participantsList)
+
+  const handleRemoveParticipant = (name: string): void => {
+    return Alert.alert("Delete", `Are you you want to delete ${name}?`, [
+      { text: "Yes", onPress: () => alert(`${name} deleted.`) },
+      { text: "No", style: "cancel" }
+    ])
+  }
   return (
     <View style={homeStyles.container}>
       <View style={homeStyles.layoutView}>
@@ -60,7 +67,7 @@ export const Home: React.FC = () => {
               id={item.id}
               key={item.id}
               name={item.name}
-              onRemove={() => alert("Delete")}
+              onRemove={() => handleRemoveParticipant(item.name)}
             />
             }
           />
